@@ -2,6 +2,7 @@ from torch.nn import CrossEntropyLoss
 import torch
 import numpy as np
 
+ #
 loss_function = CrossEntropyLoss()
 
 def train_function(data_loader, model, optimizer, scheduler, device):
