@@ -17,11 +17,11 @@ Above diagram show architecure of my project. It is considered that batch size i
 
 Data Set Used: I used <a href="https://www.kaggle.com/kazanova/sentiment140">sentiment140</a> dataset from kaggle. It contains, 1.6 million tweets, I have added my preprocessing steps to <a href="./preprocess.py">preprocess.py</a>
 
-Finally I achived 0.85 F1 score on the random subset selected from 1.6M tweets.
+Finally I achived 0.85 F1 score on the random subset of 4L, selected from 1.6M tweets.
 
-Kaggle Link to notebook file: <a href="">Bert Sentiment Analysis</a>
+Kaggle notebook Link: <a href="">Bert Sentiment Analysis</a>
 
-## Refrences
+### Refrences
 1. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer Bert Doc</a>
 2. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer training and fine tuning</a>
 3. <a href="https://github.com/google-research/bert">BERT Github</a>
