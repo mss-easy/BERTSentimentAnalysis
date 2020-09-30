@@ -15,10 +15,11 @@ class SentimentModel(nn.Module):
     This function takes, BERT Tokenized tweet and passes through
      BERTMOdel layer  -> 40% dropout -> fully connected layer to 2 outputs 
      returns 2 outputs for corresponding sentiment classes
+
+     Note: _ = token wise output (ignored), as in our task (sentiment analysis) we need aggregated output.
+     As bert layer returns two types of outputs. 
     """
     _, pooled_out = self.bert(input_ids, attention_mask, tt_ids)  
-    """ _ = token wise output (ignored), 
-        as in our task (sentiment analysis) we need aggregated output """
     out = self.drop_out(pooled_out)
     out = self.linear1(out)
     return out
