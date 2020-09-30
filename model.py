@@ -9,7 +9,6 @@ class SentimentModel(nn.Module):
     self.bert = BertModel.from_pretrained(SentConfig.BERT_PRETRAINED)
     self.drop_out = nn.Dropout(0.40)  # more dropout value for regularization
     self.linear1 = nn.Linear(SentConfig.BERT_HIDDEN_SIZE, 2)
-    # self.linear2 = nn.Linear(20,2)
 
   def forward(self, input_ids, attention_mask, tt_ids):
     """
@@ -21,6 +20,5 @@ class SentimentModel(nn.Module):
     """ _ = token wise output (ignored), 
         as in our task (sentiment analysis) we need aggregated output """
     out = self.drop_out(pooled_out)
-    # out = F.relu(self.linear1(out))  # removed as validation loss increasing
     out = self.linear1(out)
     return out

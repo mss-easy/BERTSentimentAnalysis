@@ -10,7 +10,9 @@ I used pretrained *bert-base-uncased* model and respective BERT Tokenizer.
 
 Model: I added 2 layers in front of BERT Layer as follows: 40% dropout for regularisation, and then a fully connected linear layer.
 Combined architecture:
+
 <img src="image/sentiment_arch.png">
+
 Above diagram show architecure of my project. It is considered that batch size is 1, though we can input other batch sizes too.
 
 Data Set Used: I used <a href="https://www.kaggle.com/kazanova/sentiment140">sentiment140</a> dataset from kaggle. It contains, 1.6 million tweets, I have added my preprocessing steps to <a href="./preprocess.py">preprocess.py</a>

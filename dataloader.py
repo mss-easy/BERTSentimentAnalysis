@@ -3,6 +3,7 @@ import torch
 
 class SentimentDL():
   """
+   DataLoader class, it employs mechanishm of tokenisation using bert, truncation and padding .
   :param modified_df: any dataframe train, test, validataion
   :return: DataLoader type object for the provided dataframe 
   """
