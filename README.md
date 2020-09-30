@@ -1,4 +1,4 @@
-# BERTSentimentAnalysis
+## BERT Sentiment Analysis
 A project  on BERT fine tuning for Sentiment Analysis
 
 BERT: It is a tranformer architecture model proposed in: <a href="https://arxiv.org/abs/1810.04805">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a>. By this method, we can pre-train general purpose language model and then fine tune it for a given task. BERT takes unlabled text 
