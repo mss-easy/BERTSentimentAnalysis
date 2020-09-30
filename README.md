@@ -21,7 +21,7 @@ Finally I achived 0.85 F1 score on the random subset of 4L, selected from 1.6M t
 
 Kaggle notebook Link: <a href="">Bert Sentiment Analysis</a>
 
-### Refrences
+### References
 1. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer Bert Doc</a>
 2. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer training and fine tuning</a>
 3. <a href="https://github.com/google-research/bert">BERT Github</a>
