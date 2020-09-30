@@ -97,10 +97,9 @@ def preprocess_and_train():
     model = SentimentModel()
     model.load_state_dict(state_dict_)
     model.to(device)
-
-    with torch.no_grad():
-        loss_, results = evaluation_function(test_loader, model, device, inference=True)
-        print(classification_report(results[:,1], results[:,0]))
+    
+    loss_, results = evaluation_function(test_loader, model, device, inference=True)
+    print(classification_report(results[:,1], results[:,0]))
     
 
 if __name__ == "__main__":

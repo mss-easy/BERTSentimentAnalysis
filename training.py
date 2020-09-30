@@ -36,18 +36,19 @@ def evaluation_function(data_loader, model, device, inference=False):
   model.eval()
 
   results = []
-  for batch in data_loader:
-        input_ids = batch['input_ids'].to(device)
-        attention_mask = batch['attention_mask'].to(device)
-        token_type_ids = batch['token_type_ids'].to(device)
-        target = batch['target'].to(device)
+  with torch.no_grad():
+    for batch in data_loader:
+      input_ids = batch['input_ids'].to(device)
+      attention_mask = batch['attention_mask'].to(device)
+      token_type_ids = batch['token_type_ids'].to(device)
+      target = batch['target'].to(device)
 
-        outputs = model(input_ids, attention_mask, token_type_ids)
-        if not inference:
-          batch_loss = loss_function(outputs, target)
-          epoch_loss += batch_loss.item()
-        else:
-          outputs = torch.argmax(outputs, dim=1).to('cpu').numpy()
-          target = target.to('cpu').numpy()
-          results.extend(list(zip(outputs, target)))
+      outputs = model(input_ids, attention_mask, token_type_ids)
+      if not inference:
+        batch_loss = loss_function(outputs, target)
+        epoch_loss += batch_loss.item()
+      else:
+        outputs = torch.argmax(outputs, dim=1).to('cpu').numpy()
+        target = target.to('cpu').numpy()
+        results.extend(list(zip(outputs, target)))
   return epoch_loss, np.array(results)
