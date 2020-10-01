@@ -26,6 +26,7 @@ def train_function(data_loader, model, optimizer, scheduler, device):
         optimizer.step()
         scheduler.step()
         epoch_loss += batch_loss.item()
+  epoch_loss = epoch_loss / len(data_loader)
   return epoch_loss
 
 def evaluation_function(data_loader, model, device, inference=False):
@@ -51,4 +52,5 @@ def evaluation_function(data_loader, model, device, inference=False):
         outputs = torch.argmax(outputs, dim=1).to('cpu').numpy()
         target = target.to('cpu').numpy()
         results.extend(list(zip(outputs, target)))
+  epoch_loss = epoch_loss / len(data_loader)
   return epoch_loss, np.array(results)
