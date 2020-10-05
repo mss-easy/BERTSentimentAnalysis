@@ -3,7 +3,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score, f1_score, classification_report
 
 from torch.utils.data import DataLoader
 from transformers import AdamW, get_cosine_schedule_with_warmup
@@ -68,28 +68,36 @@ def preprocess_and_train():
     num_warmup_steps = int(0.05*num_train_steps)
     scheduler = get_cosine_schedule_with_warmup(optim, num_warmup_steps, num_train_steps)
 
-    # Training : done on the basis of validation loss vs training loss
+    # Training : done on the basis of attaining better F1 score on the validation dataset
     
-    losses = []
-    max_loss = np.inf
+    scores = []
+    min_f1 = 0
     
     for epoch in range(SentConfig.EPOCHS):
-        train_loss = train_function(train_loader, model, optim, scheduler, device)
-        validation_loss, _ = evaluation_function(validation_loader, model, device)
-        losses.append((train_loss, validation_loss))
-        print('epoch num: ', epoch, ' train loss:', train_loss, ' validation loss:', validation_loss)
-        if validation_loss < max_loss:
-                torch.save(model.state_dict(), "SentimentModel.bin")
-                max_loss =  validation_loss
+        _ = train_function(train_loader, model, optim, scheduler, device)
+        _, results = evaluation_function(validation_loader, model, device)
+        
+        validation_f1 = round(f1_score(results[:,1], results[:,0]),4)
+        accuracy = round(accuracy_score(results[:,1], results[:,0]), 4)
+        
+        scores.append((validation_f1, accuracy))
+        print('epoch num: ', epoch, 'f1 score: ',validation_f1 , 'accuracy: ', accuracy)
+        if validation_f1 > min_f1:
+            # save  model if validation f1 score is 
+            torch.save(model.state_dict(), "SentimentModel3L.bin")
+            # update max loss
+            min_f1 =  validation_f1
 
-    # loss plotting 
-    losses = np.array(losses)
+    # plotting scores
+
+    scores = np.array(scores)
     fig, ax = plt.subplots(1, 2, figsize=(14,6))
-    ax[0].plot(range(SentConfig.EPOCHS), losses[:,0], 'r')
-    ax[1].plot(range(SentConfig.EPOCHS), losses[:,1])
-    ax[0].set(xlabel='Epoch num', ylabel='training loss')
-    ax[1].set(xlabel='Epoch num', ylabel='validation loss')
-    fig.show()
+    ax[0].plot(range(SentConfig.EPOCHS), scores[:,0], 'r')
+    ax[1].plot(range(SentConfig.EPOCHS), scores[:,1])
+    ax[0].set(xlabel='Epoch num', ylabel='F1 Score')
+    ax[1].set(xlabel='Epoch num', ylabel='Accuracy')
+    ax[0].set_title('validation set f1 score at each epoch')
+    ax[1].set_title('validation set accuracy at each apoch')
 
     # F1 score calculation on test predictions
 
@@ -98,8 +106,9 @@ def preprocess_and_train():
     model.load_state_dict(state_dict_)
     model.to(device)
     
-    loss_, results = evaluation_function(test_loader, model, device, inference=True)
+    _, results = evaluation_function(test_loader, model, device, inference=True)
     print(classification_report(results[:,1], results[:,0]))
+    print(round(accuracy_score(results[:,1], results[:,0]),4))
     
 
 if __name__ == "__main__":
