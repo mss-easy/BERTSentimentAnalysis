@@ -86,7 +86,7 @@ def preprocess_and_train():
         print('epoch num: ', epoch, 'f1 score: ',validation_f1 , 'accuracy: ', accuracy)
         if validation_f1 > min_f1:
             # save  model if validation f1 score is 
-            torch.save(model.state_dict(), "SentimentModel3L.bin")
+            torch.save(model.state_dict(), "SentimentModel.bin")
             # update max loss
             min_f1 =  validation_f1
 

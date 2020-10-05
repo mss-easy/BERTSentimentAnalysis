@@ -11,18 +11,17 @@ I used pretrained *bert-base-uncased* model and respective BERT Tokenizer.
 Model: I added 2 layers in front of BERT Layer as follows: 40% dropout for regularisation, and then a fully connected linear layer.
 Combined architecture:
 
-<img src="image/sentiment_arch.png">
+<img src="image/sentiment_arch_generalised.png">
 
 Above diagram show architecure of my project. It is considered that batch size is 1, though we can input other batch sizes too.
 
 Data Set Used: I used <a href="https://www.kaggle.com/kazanova/sentiment140">sentiment140</a> dataset from kaggle. It contains, 1.6 million tweets, I have added my preprocessing steps to <a href="./preprocess.py">preprocess.py</a>
 
-Finally I achived 0.85 F1 score on the random subset of 4L, selected from 1.6M tweets.
+Finally I achieved 0.85 F1 score on the random subset of 5L, selected from 1.6M tweets.
 
-Kaggle notebook Link: <a href="">Bert Sentiment Analysis</a>
+Kaggle notebook Link: <a href="https://www.kaggle.com/mahendras8894/bert-sentiment-analysis">Bert Sentiment Analysis</a>
 
 ### References
 1. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer Bert Doc</a>
 2. <a href="https://huggingface.co/transformers/model_doc/bert.html">Transformer training and fine tuning</a>
 3. <a href="https://github.com/google-research/bert">BERT Github</a>
-4. I follow <a href="https://github.com/abhishekkrthakur/">Abhishek Thakur</a>, on multiple platforms for learning. So one may find similar coding style.
