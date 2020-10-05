@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 
+import torch
 from torch.utils.data import DataLoader
 from transformers import AdamW, get_cosine_schedule_with_warmup
 
@@ -14,6 +15,7 @@ from config import SentConfig
 from model import SentimentModel
 from dataloader import SentimentDL
 from training import train_function, evaluation_function
+
 
 def preprocess_and_train():
     # read dataset
