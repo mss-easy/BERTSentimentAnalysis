@@ -15,9 +15,9 @@ Combined architecture:
 
 Above diagram show architecure of my project. It is considered that batch size is 1, though we can input other batch sizes too.
 
-Data Set Used: I used <a href="https://www.kaggle.com/kazanova/sentiment140">sentiment140</a> dataset from kaggle. It contains, 1.6 million tweets, I have added my preprocessing steps to <a href="./preprocess.py">preprocess.py</a>
+Data Set Used: I used <a href="https://www.kaggle.com/kazanova/sentiment140">sentiment140</a> dataset from kaggle. It contains, 1.6 million tweets. I trained multiple  models on processed subset. I achieved 0.85 F1 score on the random subset of 5L, selected from 1.6M tweets.
 
-Finally I achieved 0.85 F1 score on the random subset of 5L, selected from 1.6M tweets.
+I have shared some of the results on kaggle via a notebook:
 
 Kaggle notebook Link: <a href="https://www.kaggle.com/mahendras8894/bert-sentiment-analysis">Bert Sentiment Analysis</a>
 
